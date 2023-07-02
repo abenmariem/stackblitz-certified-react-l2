@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useEffect, useState, useMemo } from 'react';
 import * as Style from './SearchComponent.module.css';
 import { Category, CategoryListResponse, Question, Quiz } from './Responses';
+import { QuestionComponent } from './QuestionComponent';
 
 export const SearchComponent = () => {
   const [categoryList, setCategoryList] = useState([]);
@@ -27,8 +28,9 @@ export const SearchComponent = () => {
     }
 
     const result: CategoryListResponse = await categories.json();
-    setCategoryListLoading(false);
+
     setCategoryList(result.trivia_categories);
+    setCategoryListLoading(false);
   };
 
   const memoisedFetchCategory = React.useCallback(fetchCategories, []);
@@ -55,8 +57,9 @@ export const SearchComponent = () => {
     const questions: Array<Question> = quizResponse?.results;
 
     console.log('questions', questions);
-    setQuestionListLoading(false);
+
     setQuestionList([...questions]);
+    setQuestionListLoading(false);
   };
 
   const memoisedFetchQuiz = React.useCallback(fetchQuiz, [requestParams]);
@@ -118,17 +121,13 @@ export const SearchComponent = () => {
 
           <button className={Style.searchButton}>Create</button>
         </form>
-
-
-
-
       )}
 
       {questionListLoading ? (
         <div>Loading ...</div>
       ) : (
         questionList.map((q) => {
-          <h2> {q.question}</h2>;
+          <QuestionComponent question={q} />;
         })
       )}
     </>
