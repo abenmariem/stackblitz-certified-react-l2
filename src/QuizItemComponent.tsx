@@ -3,9 +3,13 @@ import { Question } from './Responses';
 
 export interface QuestionItemProps {
   inputQuestion: Question;
+  onSelectAnswer(data: string): void;
 }
 
-export const QuizItemComponent = ({ inputQuestion }: QuestionItemProps) => {
+export const QuizItemComponent = ({
+  inputQuestion,
+  onSelectAnswer,
+}: QuestionItemProps) => {
   console.log('question in QuizItemComponent', inputQuestion);
 
   const [question, setQuestion] = React.useState(inputQuestion);
@@ -39,6 +43,7 @@ export const QuizItemComponent = ({ inputQuestion }: QuestionItemProps) => {
   const selectAnswerHandler = (evt) => {
     evt.preventDefault();
     evt.target.classList.toggle('active');
+    onSelectAnswer(evt.currentTarget.value);
   };
 
   return (
