@@ -4,9 +4,15 @@ import { Question } from './Responses';
 
 export interface QuestionListProps {
   questions: Question[];
+  onSelectAnswer(data: string): void;
+  scrambledAnswers(question: Question): string[];
 }
 
-export const QuizComponent = ({ questions }: QuestionListProps) => {
+export const QuizComponent = ({
+  questions,
+  onSelectAnswer,
+  scrambledAnswers,
+}: QuestionListProps) => {
   console.log('question list QuizComponent', questions);
 
   const [answerList, setAnswerList] = React.useState([]);
@@ -19,10 +25,6 @@ export const QuizComponent = ({ questions }: QuestionListProps) => {
     questions.forEach((question) => {
       answerList.forEach((answer) => {});
     });
-  };
-
-  const handleAnswerSelection = (answer: string) => {
-    setAnswerList([...answerList, answer]);
   };
 
   return (
@@ -39,7 +41,8 @@ export const QuizComponent = ({ questions }: QuestionListProps) => {
 
               <QuizItemComponent
                 inputQuestion={question}
-                onSelectAnswer={handleAnswerSelection}
+                onSelectAnswer={onSelectAnswer}
+                scrambleAnswers= {scrambledAnswers}
               />
             </div>
           );

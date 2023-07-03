@@ -2,8 +2,9 @@ import * as React from 'react';
 import { useEffect, useState, useMemo } from 'react';
 import * as Style from './SearchComponent.module.css';
 import { Category, CategoryListResponse, Question, Quiz } from './Responses';
-import { QuestionComponent } from './QuestionComponent';
 import { QuizComponent } from './QuizComponent';
+import { QuizResultComponent } from './QuizResultComponent';
+
 
 export const SearchComponent = () => {
   const [categoryList, setCategoryList] = useState([]);
@@ -12,7 +13,9 @@ export const SearchComponent = () => {
 
   const [questionListLoading, setQuestionListLoading] = useState(false);
 
-  const [questionList, setQuestionList] = useState([]);
+  const [questionList, setQuestionList] = useState<Array<Question>>([]);
+
+  const [answerList, setAnswerList] = useState([]);
 
   const [requestParams, setRequestParams] = useState({
     category: '',
@@ -71,6 +74,32 @@ export const SearchComponent = () => {
     fetchQuiz();
   }, [requestParams]);
 
+
+  const handleAnswerSelection = (answer: string) => {
+    setAnswerList([...answerList, answer]);
+  };
+
+  const getScrambledArrayAnswers = (questionToScramble: Question) => {
+    const result: string[] = [];
+    if (typeof questionToScramble.correct_answer === 'string') {
+      result.push(questionToScramble.correct_answer);
+    }
+    if (typeof questionToScramble.incorrect_answers === 'string') {
+      result.push(questionToScramble.incorrect_answers);
+    }
+
+    if (Array.isArray(questionToScramble.correct_answer)) {
+      result.push(...questionToScramble.correct_answer);
+    }
+
+    if (Array.isArray(questionToScramble.incorrect_answers)) {
+      result.push(...questionToScramble.incorrect_answers);
+    }
+
+    return result;
+  };
+
+
   return (
     <>
       <h2> Quiz Maker</h2>
@@ -120,7 +149,9 @@ export const SearchComponent = () => {
 
           <button className='searchButton'>Create</button>
 
-          <QuizComponent questions={...questionList} />
+          <QuizComponent questions={...questionList} onSelectAnswer={handleAnswerSelection} scrambledAnswers= {getScrambledArrayAnswers} />
+
+          <QuizResultComponent  inputQuestions={...questionList} answers={...answerList} />
         </form>
 
         

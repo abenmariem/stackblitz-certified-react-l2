@@ -4,11 +4,13 @@ import { Question } from './Responses';
 export interface QuestionItemProps {
   inputQuestion: Question;
   onSelectAnswer(data: string): void;
+  scrambledAnswers(question: Question): string[];
 }
 
 export const QuizItemComponent = ({
   inputQuestion,
   onSelectAnswer,
+  scrambledAnswers,
 }: QuestionItemProps) => {
   console.log('question in QuizItemComponent', inputQuestion);
 
@@ -18,27 +20,7 @@ export const QuizItemComponent = ({
     return null;
   }
 
-  const getScrambledArrayAnswers: () => string[] = () => {
-    const result: string[] = [];
-    if (typeof question.correct_answer === 'string') {
-      result.push(question.correct_answer);
-    }
-    if (typeof question.incorrect_answers === 'string') {
-      result.push(question.incorrect_answers);
-    }
-
-    if (Array.isArray(question.correct_answer)) {
-      result.push(...question.correct_answer);
-    }
-
-    if (Array.isArray(question.incorrect_answers)) {
-      result.push(...question.incorrect_answers);
-    }
-
-    return result;
-  };
-
-  const scrambledArrayAnswers: Array<string> = getScrambledArrayAnswers();
+  const scrambledArrayAnswers = scrambledAnswers(question);
 
   const selectAnswerHandler = (evt) => {
     evt.preventDefault();
