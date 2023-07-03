@@ -2,29 +2,29 @@ import * as React from 'react';
 import { QuizItemComponent } from './QuizItemComponent';
 import { Question } from './Responses';
 
-export interface QuestionListProps {
+export interface QuizProps {
   questions: Question[];
+  answers: string[];
   onSelectAnswer(data: string): void;
+  onQuizSubmitted(data: boolean): void;
   scrambledAnswers(question: Question): string[];
 }
 
 export const QuizComponent = ({
   questions,
+  answers,
   onSelectAnswer,
+  onQuizSubmitted,
   scrambledAnswers,
-}: QuestionListProps) => {
+}: QuizProps) => {
   console.log('question list QuizComponent', questions);
-
-  const [answerList, setAnswerList] = React.useState([]);
 
   if (questions.length == 0) {
     return null;
   }
 
-  const submitAnswers = () => {
-    questions.forEach((question) => {
-      answerList.forEach((answer) => {});
-    });
+  const handleQuizSubmitted = () => {
+    onQuizSubmitted(true);
   };
 
   return (
@@ -42,7 +42,7 @@ export const QuizComponent = ({
               <QuizItemComponent
                 inputQuestion={question}
                 onSelectAnswer={onSelectAnswer}
-                scrambleAnswers= {scrambledAnswers}
+                scrambledAnswers={scrambledAnswers}
               />
             </div>
           );
@@ -50,8 +50,8 @@ export const QuizComponent = ({
         <div className="submitAnswersContainer">
           <button
             className="submitAnswersButton"
-            style={{ display: answerList.length != 5 ? 'none' : 'block' }}
-            onClick={submitAnswers}
+            style={{ display: answers.length < 5 ? 'none' : 'block' }}
+            onClick={handleQuizSubmitted}
           >
             Submit
           </button>

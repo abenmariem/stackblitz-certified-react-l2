@@ -15,12 +15,14 @@ export const SearchComponent = () => {
 
   const [questionList, setQuestionList] = useState<Array<Question>>([]);
 
-  const [answerList, setAnswerList] = useState([]);
+  const [answerList, setAnswerList] = useState<Array<string>>([]);
 
   const [requestParams, setRequestParams] = useState({
     category: '',
     difficulty: '',
   });
+
+  const [quizSubmitted, setQuizSubmitted] = useState<boolean>(false);
 
   const fetchCategories = async () => {
     setCategoryListLoading(true);
@@ -79,7 +81,7 @@ export const SearchComponent = () => {
     setAnswerList([...answerList, answer]);
   };
 
-  const getScrambledArrayAnswers = (questionToScramble: Question) => {
+  const getScrambledArrayAnswers: (question: Question) => string[] = (questionToScramble: Question) => {
     const result: string[] = [];
     if (typeof questionToScramble.correct_answer === 'string') {
       result.push(questionToScramble.correct_answer);
@@ -149,23 +151,10 @@ export const SearchComponent = () => {
 
           <button className='searchButton'>Create</button>
 
-          <QuizComponent questions={...questionList} onSelectAnswer={handleAnswerSelection} scrambledAnswers= {getScrambledArrayAnswers} />
-
-          <QuizResultComponent  inputQuestions={...questionList} answers={...answerList} />
+          {quizSubmitted ? <QuizResultComponent  inputQuestions={...questionList} answers={...answerList} /> : <QuizComponent questions={...questionList} onSelectAnswer={handleAnswerSelection} onQuizSubmitted={setQuizSubmitted} scrambledAnswers={getScrambledArrayAnswers} answers={...answerList}/>} 
+          
         </form>
-
-        
-
-
-
-
       )}
-
-      
-
-
-
-
 
     </>
   );

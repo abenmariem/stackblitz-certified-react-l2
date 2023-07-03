@@ -19,7 +19,12 @@ export const QuizResultComponent = ({
   return (
     <>
       <div>
-        {answers.map((answer) => (
+        <h2> Result Quiz </h2>
+        {
+        
+        
+        
+        /*answers.map((answer) => (
           <button
             key={answer}
             value={answer}
@@ -27,7 +32,7 @@ export const QuizResultComponent = ({
           >
             {answer}
           </button>
-        ))}
+        ))*/}
       </div>
     </>
   );
