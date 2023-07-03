@@ -14,7 +14,7 @@ export const QuizItemComponent = ({ inputQuestion }: QuestionItemProps) => {
     return null;
   }
 
-  const getScrambledArrayAnswers = () => {
+  const getScrambledArrayAnswers: () => string[] = () => {
     const result: string[] = [];
     if (typeof question.correct_answer === 'string') {
       result.push(question.correct_answer);
@@ -34,12 +34,17 @@ export const QuizItemComponent = ({ inputQuestion }: QuestionItemProps) => {
     return result;
   };
 
+  const scrambledArrayAnswers: Array<string> = getScrambledArrayAnswers();
+
   return (
     <>
       <div>
-        {getScrambledArrayAnswers().map((answer) => {
-          <button> {answer}</button>;
-        })}
+        {scrambledArrayAnswers &&
+          scrambledArrayAnswers.map((answer) => (
+            <button key={answer} value={answer}>
+              {answer}
+            </button>
+          ))}
       </div>
     </>
   );
