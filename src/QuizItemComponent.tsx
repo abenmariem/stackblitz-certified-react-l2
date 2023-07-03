@@ -49,7 +49,7 @@ export const QuizItemComponent = ({ inputQuestion }: QuestionItemProps) => {
             <button
               key={answer}
               value={answer}
-              className="aternativeButton"
+              className="aternativeButton tick"
               onClick={selectAnswerHandler}
             >
               {answer}

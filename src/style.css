@@ -36,11 +36,18 @@ p {
   color: white;
 }
 
-.submitAnswersButton {
+.submitAnswersContainer {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
+}
+
+.submitAnswersButton {
   width: 200px;
   height: 30px;
   margin-top: 20px;
+  background-color: grey;
+  border: none;
+  color: white;
 }
