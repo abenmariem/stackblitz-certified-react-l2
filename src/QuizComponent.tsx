@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { QuizItemComponent } from './QuizItemComponent';
 import { Question } from './Responses';
 
 export interface QuestionListProps {
@@ -19,10 +20,7 @@ export const QuizComponent = ({ questions }: QuestionListProps) => {
           return (
             <h2 key={question.question}>
               {question.question}
-              {[...question.correct_answer].map((answer) => (
-                <button> {answer}</button>
-              ))}
-              ;
+              <QuizItemComponent inputQuestion={question} />
             </h2>
           );
         })}
