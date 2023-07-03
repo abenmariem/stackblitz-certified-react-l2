@@ -41,7 +41,7 @@ export const QuizItemComponent = ({ inputQuestion }: QuestionItemProps) => {
       <div>
         {scrambledArrayAnswers &&
           scrambledArrayAnswers.map((answer) => (
-            <button key={answer} value={answer} className="searchSelect">
+            <button key={answer} value={answer} className="aternativeButton">
               {answer}
             </button>
           ))}
