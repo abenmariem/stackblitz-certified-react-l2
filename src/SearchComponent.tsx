@@ -3,6 +3,7 @@ import { useEffect, useState, useMemo } from 'react';
 import * as Style from './SearchComponent.module.css';
 import { Category, CategoryListResponse, Question, Quiz } from './Responses';
 import { QuestionComponent } from './QuestionComponent';
+import { QuizComponent } from './QuizComponent';
 
 export const SearchComponent = () => {
   const [categoryList, setCategoryList] = useState([]);
@@ -62,14 +63,12 @@ export const SearchComponent = () => {
     setQuestionListLoading(false);
   };
 
-  const memoisedFetchQuiz = React.useCallback(fetchQuiz, [requestParams]);
-
   useEffect(() => {
     memoisedFetchCategory();
   }, []);
 
   useEffect(() => {
-    memoisedFetchQuiz();
+    fetchQuiz();
   }, [requestParams]);
 
   return (
@@ -120,16 +119,23 @@ export const SearchComponent = () => {
           </select>
 
           <button className={Style.searchButton}>Create</button>
+
+          <QuizComponent questions={...questionList} />
         </form>
+
+        
+
+
+
+
       )}
 
-      {questionListLoading ? (
-        <div>Loading ...</div>
-      ) : (
-        questionList.map((q) => {
-          <QuestionComponent question={q} />;
-        })
-      )}
+      
+
+
+
+
+
     </>
   );
 };
