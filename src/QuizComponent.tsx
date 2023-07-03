@@ -10,7 +10,7 @@ export const QuizComponent = ({ questions }: QuestionListProps) => {
   console.log('question list QuizComponent', questions);
 
   if (questions.length == 0) {
-    return <div> Empty Quiz </div>;
+    return null;
   }
 
   return (
