@@ -18,10 +18,15 @@ export const QuizComponent = ({ questions }: QuestionListProps) => {
       <div>
         {questions.map((question) => {
           return (
-            <h2 key={question.question}>
-              {question.question}
+            <div>
+              <h2
+                key={question.question}
+                className="tick"
+                dangerouslySetInnerHTML={{ __html: question.question }}
+              />
+
               <QuizItemComponent inputQuestion={question} />
-            </h2>
+            </div>
           );
         })}
       </div>

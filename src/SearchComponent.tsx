@@ -92,7 +92,7 @@ export const SearchComponent = () => {
           <select
             id="categorySelect"
             name="category"
-            className={Style.searchSelect}
+            className='searchSelect'
           >
             <option value="" disabled selected>
               Select a Category
@@ -108,7 +108,7 @@ export const SearchComponent = () => {
           <select
             id="difficultySelect"
             name="difficulty"
-            className={Style.searchSelect}
+            className='searchSelect'
           >
             <option value="" disabled selected>
               Select a difficulty
@@ -118,7 +118,7 @@ export const SearchComponent = () => {
             <option value="hard"> hard </option>
           </select>
 
-          <button className={Style.searchButton}>Create</button>
+          <button className='searchButton'>Create</button>
 
           <QuizComponent questions={...questionList} />
         </form>
