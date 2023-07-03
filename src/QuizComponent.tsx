@@ -29,6 +29,7 @@ export const QuizComponent = ({ questions }: QuestionListProps) => {
             </div>
           );
         })}
+        <button className="submitAnswersButton">Submit</button>
       </div>
     </>
   );

@@ -37,22 +37,25 @@ export const QuizItemComponent = ({ inputQuestion }: QuestionItemProps) => {
   const scrambledArrayAnswers: Array<string> = getScrambledArrayAnswers();
 
   const selectAnswerHandler = (evt) => {
-       evt.preventDefault();
-       evt.target.classList.toggle("active");
-  }
-
+    evt.preventDefault();
+    evt.target.classList.toggle('active');
+  };
 
   return (
     <>
       <div>
         {scrambledArrayAnswers &&
           scrambledArrayAnswers.map((answer) => (
-            <button key={answer} value={answer} className="aternativeButton" onClick={selectAnswerHandler}>
+            <button
+              key={answer}
+              value={answer}
+              className="aternativeButton"
+              onClick={selectAnswerHandler}
+            >
               {answer}
             </button>
           ))}
       </div>
-      <button>Submit</button>
     </>
   );
 };

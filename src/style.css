@@ -35,3 +35,12 @@ p {
   background-color: green;
   color: white;
 }
+
+.submitAnswersButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 30px;
+  margin-top: 20px;
+}
