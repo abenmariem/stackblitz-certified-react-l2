@@ -26,33 +26,30 @@ export const QuizResultComponent = ({
 
   return (
     <>
-      <div>
-        {inputQuestions.map((question) => {
-          return (
-            <div>
-              <h2
-                key={question.question}
-                className="tick"
-                dangerouslySetInnerHTML={{ __html: question.question }}
-              />
-              {answers.map((answer: string) => {
-                <QuizResultItemComponent
-                  inputQuestion={question}
-                  userAnswer={answer}
-                  scrambledAnswers={scrambledAnswers}
-                />;
-              })}
-            </div>
-          );
-        })}
-        <div className="submitAnswersContainer">
-          <button
-            className="submitAnswersButton"
-            // onClick={handleRegenerateQuiz}
+      {inputQuestions.map((question) => {
+        return (
+          <div
+            key={question.question}
+            className="tick"
+            dangerouslySetInnerHTML={{ __html: question.question }}
           >
-            Submit
-          </button>
-        </div>
+            {answers.map((answer: string) => {
+              <QuizResultItemComponent
+                inputQuestion={question}
+                userAnswer={answer}
+                scrambledAnswers={scrambledAnswers}
+              />;
+            })}
+          </div>
+        );
+      })}
+      <div className="submitAnswersContainer">
+        <button
+          className="submitAnswersButton"
+          // onClick={handleRegenerateQuiz}
+        >
+          Submit
+        </button>
       </div>
     </>
   );
