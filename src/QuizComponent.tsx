@@ -5,6 +5,7 @@ import { Question } from './Responses';
 export interface QuizProps {
   questions: Question[];
   answers: string[];
+  quizSubmitted: boolean;
   onSelectAnswer(data: string): void;
   onQuizSubmitted(data: boolean): void;
   scrambledAnswers(question: Question): string[];
@@ -16,6 +17,7 @@ export const QuizComponent = ({
   onSelectAnswer,
   onQuizSubmitted,
   scrambledAnswers,
+  quizSubmitted,
 }: QuizProps) => {
   console.log('question list QuizComponent', questions);
 
@@ -29,7 +31,7 @@ export const QuizComponent = ({
 
   return (
     <>
-      <div>
+      <div style={{ display: quizSubmitted ? 'none' : 'block' }}>
         {questions.map((question) => {
           return (
             <div>

@@ -69,7 +69,6 @@ export const QuizResultItemComponent = ({
 
   return (
     <>
-      <h2> Quiz item component</h2>
       {questionScrambledAnswers.map((questionAnswer) => {
         console.log('button text ', questionAnswer);
         return getUserButton(questionAnswer);
