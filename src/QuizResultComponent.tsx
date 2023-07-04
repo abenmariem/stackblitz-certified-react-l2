@@ -24,21 +24,26 @@ export const QuizResultComponent = ({
     return null;
   }
 
+  // const answerList: string[]= answers;
+
   return (
     <>
       {inputQuestions.map((question) => {
         return (
-          <div
-            key={question.question}
-            className="tick"
-            dangerouslySetInnerHTML={{ __html: question.question }}
-          >
+          <div>
+            <h2
+              key={question.question}
+              className="tick"
+              dangerouslySetInnerHTML={{ __html: question.question }}
+            />
             {answers.map((answer: string) => {
-              <QuizResultItemComponent
-                inputQuestion={question}
-                userAnswer={answer}
-                scrambledAnswers={scrambledAnswers}
-              />;
+              return (
+                <QuizResultItemComponent
+                  inputQuestion={question}
+                  userAnswer={answer}
+                  scrambledAnswers={scrambledAnswers}
+                />
+              );
             })}
           </div>
         );

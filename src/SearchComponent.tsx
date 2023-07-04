@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useEffect, useState, useMemo } from 'react';
-import * as Style from './SearchComponent.module.css';
 import { Category, CategoryListResponse, Question, Quiz } from './Responses';
 import { QuizComponent } from './QuizComponent';
 import { QuizResultComponent } from './QuizResultComponent';
