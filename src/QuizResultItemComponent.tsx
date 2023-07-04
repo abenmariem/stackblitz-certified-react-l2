@@ -57,13 +57,15 @@ export const QuizResultItemComponent = ({
       <h2> Quiz item component</h2>
       {questionScrambledAnswers.map((questionAnswer) => {
         console.log('button text ', questionAnswer);
-        <button
-          key={questionAnswer}
-          value={questionAnswer}
-          className="resultButtonCorrect tick"
-        >
-          {questionAnswer}
-        </button>;
+        return (
+          <button
+            key={questionAnswer}
+            value={questionAnswer}
+            className="resultButtonCorrect tick"
+          >
+            {questionAnswer}
+          </button>
+        );
       })}
     </>
   );
