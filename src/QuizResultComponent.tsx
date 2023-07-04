@@ -5,15 +5,22 @@ import { QuizResultItemComponent } from './QuizResultItemComponent';
 export interface QuestionResultProps {
   inputQuestions: Question[];
   answers: string[];
+  scrambledAnswers(question: Question): string[];
 }
 
 export const QuizResultComponent = ({
   inputQuestions,
   answers,
+  scrambledAnswers,
 }: QuestionResultProps) => {
-  console.log('question in QuizResultComponent', inputQuestions);
+  console.log('questions in QuizResultComponent', inputQuestions);
   console.log('answers in QuizResultComponent', answers);
-  if (!inputQuestions || !answers) {
+  if (
+    !inputQuestions ||
+    inputQuestions.length == 0 ||
+    !answers ||
+    answers.length == 0
+  ) {
     return null;
   }
 
@@ -28,8 +35,13 @@ export const QuizResultComponent = ({
                 className="tick"
                 dangerouslySetInnerHTML={{ __html: question.question }}
               />
-
-              <QuizResultItemComponent inputQuestion={question} answers={answers} />
+              {answers.map((answer: string) => {
+                <QuizResultItemComponent
+                  inputQuestion={question}
+                  userAnswer={answer}
+                  scrambledAnswers={scrambledAnswers}
+                />;
+              })}
             </div>
           );
         })}

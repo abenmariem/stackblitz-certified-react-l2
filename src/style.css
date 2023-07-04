@@ -36,6 +36,16 @@ p {
   color: white;
 }
 
+.correct {
+  background-color: green;
+  color: white;
+}
+
+.incorrect {
+  background-color: red;
+  color: white;
+}
+
 .submitAnswersContainer {
   display: flex;
   justify-content: center;
@@ -50,4 +60,37 @@ p {
   background-color: grey;
   border: none;
   color: white;
+}
+
+.resultButtonIncorrect {
+  margin-left: 10px;
+  margin-top: 10px;
+  height: 30px;
+  width: 200px;
+  border-radius: 15px 15px;
+  border-color: green;
+  background-color: red;
+  color: white;
+}
+
+.resultButtonCorrect {
+  margin-left: 10px;
+  margin-top: 10px;
+  height: 30px;
+  width: 200px;
+  border-radius: 15px 15px;
+  border-color: green;
+  background-color: green;
+  color: white;
+}
+
+.resultButtonNotSelected {
+  margin-left: 10px;
+  margin-top: 10px;
+  height: 30px;
+  width: 200px;
+  border-radius: 15px 15px;
+  border-color: green;
+  background-color: white;
+  color: green;
 }

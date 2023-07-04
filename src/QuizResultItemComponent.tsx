@@ -3,44 +3,68 @@ import { Question } from './Responses';
 
 export interface QuestionResultItemProps {
   inputQuestion: Question;
-  answers: string[];
+  userAnswer: string;
+  scrambledAnswers(question: Question): string[];
 }
 
 export const QuizResultItemComponent = ({
   inputQuestion,
-  answers,
+  userAnswer,
+  scrambledAnswers,
 }: QuestionResultItemProps) => {
-  console.log('question in QuizItemComponent', inputQuestion);
+  console.log('question in QuizResultItemComponent', inputQuestion);
+  console.log('answers in QuizResultItemComponent', userAnswer);
 
-  if (!inputQuestion) {
+  if (!inputQuestion || !userAnswer) {
+    console.log('null is returned');
     return null;
   }
 
-  return (
-    <>
-      <div>
-        {answers &&
-          answers.map((userAnswer) => (
-
-           {userAnswer === inputQuestion.correct_answer ?
-            <button
-            key={userAnswer}
-            value={userAnswer}
-            className="aternativeButton tick active"
-            //  onClick={selectAnswerHandler}
-          >
-            {userAnswer}
-          </button> : <button
+  const getUserButton = (userAnswer: string) => {
+    if (inputQuestion.correct_answer === userAnswer) {
+      console.log('user response is correct', userAnswer);
+      return (
+        <button
           key={userAnswer}
           value={userAnswer}
-          className="aternativeButton tick active"
-          //  onClick={selectAnswerHandler}
+          className="resultButtonCorrect tick"
         >
           {userAnswer}
         </button>
-           
-          ))}
-      </div>
+      );
+    } else {
+      console.log('user response is incorrect', userAnswer);
+      return (
+        <button
+          key={userAnswer}
+          value={userAnswer}
+          className="resultButtonNotSelected tick"
+        >
+          {userAnswer}
+        </button>
+      );
+    }
+  };
+
+  const questionScrambledAnswers = scrambledAnswers(inputQuestion);
+  console.log(
+    'scrambledAnswers in Quiz item component',
+    questionScrambledAnswers
+  );
+
+  return (
+    <>
+      <h2> Quiz item component</h2>
+      {questionScrambledAnswers.map((questionAnswer) => {
+        console.log('button text ', questionAnswer);
+        <button
+          key={questionAnswer}
+          value={questionAnswer}
+          className="resultButtonCorrect tick"
+        >
+          {questionAnswer}
+        </button>;
+      })}
     </>
   );
 };

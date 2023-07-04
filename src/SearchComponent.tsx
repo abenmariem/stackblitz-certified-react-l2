@@ -151,7 +151,7 @@ export const SearchComponent = () => {
 
           <button className='searchButton'>Create</button>
 
-          {quizSubmitted ? <QuizResultComponent  inputQuestions={...questionList} answers={...answerList} /> : <QuizComponent questions={...questionList} onSelectAnswer={handleAnswerSelection} onQuizSubmitted={setQuizSubmitted} scrambledAnswers={getScrambledArrayAnswers} answers={...answerList}/>} 
+          {quizSubmitted ? <QuizResultComponent  inputQuestions={...questionList} answers={...answerList} scrambledAnswers={getScrambledArrayAnswers} /> : <QuizComponent questions={...questionList} onSelectAnswer={handleAnswerSelection} onQuizSubmitted={setQuizSubmitted} scrambledAnswers={getScrambledArrayAnswers} answers={...answerList}/>} 
           
         </form>
       )}
