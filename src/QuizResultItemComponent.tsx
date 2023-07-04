@@ -20,19 +20,34 @@ export const QuizResultItemComponent = ({
     return null;
   }
 
-  const getUserButton = (userAnswer: string) => {
-    if (inputQuestion.correct_answer === userAnswer) {
+  const getUserButton = (questionAnswer: string) => {
+    if (questionAnswer === userAnswer) {
+      if (userAnswer === inputQuestion.correct_answer) {
+        return (
+          <button
+            key={userAnswer}
+            value={userAnswer}
+            className="resultButtonCorrect tick"
+          >
+            {userAnswer}
+          </button>
+        );
+      } else {
+        // The current answer is user's answer and is incorrect
+        //Highlight the correct answer with red background
+        return (
+          <button
+            key={userAnswer}
+            value={userAnswer}
+            className="resultButtonIncorrect tick"
+          >
+            {userAnswer}
+          </button>
+        );
+      }
       console.log('user response is correct', userAnswer);
-      return (
-        <button
-          key={userAnswer}
-          value={userAnswer}
-          className="resultButtonCorrect tick"
-        >
-          {userAnswer}
-        </button>
-      );
     } else {
+      //The current answer isn't user's answer
       console.log('user response is incorrect', userAnswer);
       return (
         <button
@@ -57,15 +72,7 @@ export const QuizResultItemComponent = ({
       <h2> Quiz item component</h2>
       {questionScrambledAnswers.map((questionAnswer) => {
         console.log('button text ', questionAnswer);
-        return (
-          <button
-            key={questionAnswer}
-            value={questionAnswer}
-            className="resultButtonCorrect tick"
-          >
-            {questionAnswer}
-          </button>
-        );
+        return getUserButton(questionAnswer);
       })}
     </>
   );
