@@ -24,7 +24,47 @@ export const QuizResultComponent = ({
     return null;
   }
 
-  // const answerList: string[]= answers;
+  const getUserButton = (
+    questionAnswer: string,
+    inputQuestion: Question,
+    index: number
+  ) => {
+    if (questionAnswer === answers[index]) {
+      return (
+        <button
+          key={questionAnswer}
+          value={questionAnswer}
+          className="resultButtonCorrect"
+          disabled={true}
+        >
+          {questionAnswer}
+        </button>
+      );
+    } else if (questionAnswer === inputQuestion.correct_answer) {
+      //the answer is correct and is not the answer of the user
+      return (
+        <button
+          key={questionAnswer}
+          value={questionAnswer}
+          className="resultButtonIncorrect"
+          disabled={true}
+        >
+          {questionAnswer}
+        </button>
+      );
+    } else {
+      return (
+        <button
+          key={questionAnswer}
+          value={questionAnswer}
+          className="resultButtonNotSelected"
+          disabled={true}
+        >
+          {questionAnswer}
+        </button>
+      );
+    }
+  };
 
   return (
     <>
@@ -36,15 +76,11 @@ export const QuizResultComponent = ({
               className="tick"
               dangerouslySetInnerHTML={{ __html: question.question }}
             />
-            {answers.map((answer: string) => {
-              return (
-                <QuizResultItemComponent
-                  inputQuestion={question}
-                  userAnswer={answer}
-                  scrambledAnswers={scrambledAnswers}
-                />
-              );
-            })}
+            {scrambledAnswers(question).map(
+              (questionAnswer: string, index: number) => {
+                return getUserButton(questionAnswer, question, index);
+              }
+            )}
           </div>
         );
       })}
