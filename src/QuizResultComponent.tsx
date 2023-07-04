@@ -40,7 +40,10 @@ export const QuizResultComponent = ({
           {questionAnswer}
         </button>
       );
-    } else if (questionAnswer === inputQuestion.correct_answer) {
+    } else if (
+      questionAnswer !== answers[index] &&
+      questionAnswer === inputQuestion.correct_answer
+    ) {
       //the answer is correct and is not the answer of the user
       return (
         <button
