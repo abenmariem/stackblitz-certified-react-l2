@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Question } from './Responses';
+import { QuizResultItemComponent } from './QuizResultItemComponent';
 
 export interface QuestionResultProps {
   inputQuestions: Question[];
@@ -19,20 +20,27 @@ export const QuizResultComponent = ({
   return (
     <>
       <div>
-        <h2> Result Quiz </h2>
-        {
-        
-        
-        
-        /*answers.map((answer) => (
+        {inputQuestions.map((question) => {
+          return (
+            <div>
+              <h2
+                key={question.question}
+                className="tick"
+                dangerouslySetInnerHTML={{ __html: question.question }}
+              />
+
+              <QuizResultItemComponent inputQuestion={question} answers={answers} />
+            </div>
+          );
+        })}
+        <div className="submitAnswersContainer">
           <button
-            key={answer}
-            value={answer}
-            className="aternativeButton tick active"
+            className="submitAnswersButton"
+            // onClick={handleRegenerateQuiz}
           >
-            {answer}
+            Submit
           </button>
-        ))*/}
+        </div>
       </div>
     </>
   );

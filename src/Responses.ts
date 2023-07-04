@@ -14,7 +14,7 @@ export interface Question {
   type: string;
   difficulty: Difficulty;
   question: string;
-  correct_answer: Array<string> | string;
+  correct_answer: string;
   incorrect_answers: Array<string> | string;
 }
 
