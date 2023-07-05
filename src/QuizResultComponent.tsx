@@ -135,8 +135,6 @@ export const QuizResultComponent = ({
         );
       })}
 
-      {console.log('numberCorrectAnswers', numberCorrectAnswers)}
-
       <div className={getResultCssClass()}>
         You scored {numberCorrectAnswers} out of 5
       </div>

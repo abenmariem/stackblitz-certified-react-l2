@@ -105,6 +105,7 @@ p {
   width: fit-content;
   height: 30px;
   text-align: center;
+  margin: 0 auto;
   margin-top: 10px;
 }
 
@@ -114,6 +115,7 @@ p {
   width: fit-content;
   height: 30px;
   text-align: center;
+  margin: 0 auto;
   margin-top: 10px;
 }
 
@@ -123,5 +125,6 @@ p {
   width: fit-content;
   height: 30px;
   text-align: center;
+  margin: 0 auto;
   margin-top: 10px;
 }
