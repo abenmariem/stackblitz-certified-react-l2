@@ -6,12 +6,16 @@ export interface QuestionResultProps {
   inputQuestions: Question[];
   answers: string[];
   scrambledAnswers(question: Question): string[];
+  onGenerateQuiz(data: boolean): void;
+  setQuestionList(questions: Question[]): void;
 }
 
 export const QuizResultComponent = ({
   inputQuestions,
   answers,
   scrambledAnswers,
+  onGenerateQuiz,
+  setQuestionList,
 }: QuestionResultProps) => {
   console.log('questions in QuizResultComponent', inputQuestions);
   console.log('answers in QuizResultComponent', answers);
@@ -67,9 +71,11 @@ export const QuizResultComponent = ({
     }
   };
 
-  handleRegenerateQuiz(){
-    
-  }
+  const handleRegenerateQuiz = (evt) => {
+    evt.preventDefault();
+    onGenerateQuiz(false);
+    setQuestionList([]);
+  };
 
   return (
     <>
@@ -94,11 +100,8 @@ export const QuizResultComponent = ({
         );
       })}
       <div className="submitAnswersContainer">
-        <button
-          className="submitAnswersButton"
-          onClick={handleRegenerateQuiz}
-        >
-          Create a new Quiz 
+        <button className="submitAnswersButton" onClick={handleRegenerateQuiz}>
+          Create a new Quiz
         </button>
       </div>
     </>
