@@ -15,6 +15,7 @@ export const QuizResultComponent = ({
 }: QuestionResultProps) => {
   console.log('questions in QuizResultComponent', inputQuestions);
   console.log('answers in QuizResultComponent', answers);
+
   if (
     !inputQuestions ||
     inputQuestions.length == 0 ||
@@ -32,7 +33,6 @@ export const QuizResultComponent = ({
     if (questionAnswer === answers[index]) {
       return (
         <button
-          key={questionAnswer}
           value={questionAnswer}
           className="resultButtonCorrect"
           disabled={true}
@@ -41,13 +41,12 @@ export const QuizResultComponent = ({
         </button>
       );
     } else if (
-      questionAnswer !== answers[index] &&
+      questionAnswer != answers[index] &&
       questionAnswer === inputQuestion.correct_answer
     ) {
       //the answer is correct and is not the answer of the user
       return (
         <button
-          key={questionAnswer}
           value={questionAnswer}
           className="resultButtonIncorrect"
           disabled={true}
@@ -58,7 +57,6 @@ export const QuizResultComponent = ({
     } else {
       return (
         <button
-          key={questionAnswer}
           value={questionAnswer}
           className="resultButtonNotSelected"
           disabled={true}
@@ -69,9 +67,13 @@ export const QuizResultComponent = ({
     }
   };
 
+  handleRegenerateQuiz(){
+    
+  }
+
   return (
     <>
-      {inputQuestions.map((question) => {
+      {inputQuestions.map((question, index) => {
         return (
           <div>
             <h2
@@ -80,8 +82,12 @@ export const QuizResultComponent = ({
               dangerouslySetInnerHTML={{ __html: question.question }}
             />
             {scrambledAnswers(question).map(
-              (questionAnswer: string, index: number) => {
-                return getUserButton(questionAnswer, question, index);
+              (questionAnswer: string, answerIndex) => {
+                return (
+                  <span key={index + '_' + answerIndex}>
+                    {getUserButton(questionAnswer, question, index)}
+                  </span>
+                );
               }
             )}
           </div>
@@ -90,9 +96,9 @@ export const QuizResultComponent = ({
       <div className="submitAnswersContainer">
         <button
           className="submitAnswersButton"
-          // onClick={handleRegenerateQuiz}
+          onClick={handleRegenerateQuiz}
         >
-          Submit
+          Create a new Quiz 
         </button>
       </div>
     </>
