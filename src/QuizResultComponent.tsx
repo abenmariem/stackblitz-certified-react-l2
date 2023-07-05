@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Question } from './Responses';
 import { QuizResultItemComponent } from './QuizResultItemComponent';
 
@@ -20,6 +21,8 @@ export const QuizResultComponent = ({
   console.log('questions in QuizResultComponent', inputQuestions);
   console.log('answers in QuizResultComponent', answers);
 
+  let numberCorrectAnswers = 0;
+
   if (
     !inputQuestions ||
     inputQuestions.length == 0 ||
@@ -35,6 +38,10 @@ export const QuizResultComponent = ({
     index: number
   ) => {
     if (questionAnswer === answers[index]) {
+      if (questionAnswer == inputQuestion.correct_answer) {
+        numberCorrectAnswers++;
+      }
+
       return (
         <button
           value={questionAnswer}
@@ -77,6 +84,34 @@ export const QuizResultComponent = ({
     setQuestionList([]);
   };
 
+  const getResultCssClass = () => {
+    let className = 'noResult';
+    switch (numberCorrectAnswers) {
+      case 0:
+        className = 'redResult';
+        break;
+      case 1:
+        className = 'redResult';
+        break;
+      case 2:
+        className = 'yellowResult';
+        break;
+      case 3:
+        className = 'yellowResult';
+        break;
+      case 4:
+        className = 'greenResult';
+        break;
+      case 4:
+        className = 'greenResult';
+        break;
+      default:
+        className = 'noResult';
+        break;
+    }
+    return className;
+  };
+
   return (
     <>
       {inputQuestions.map((question, index) => {
@@ -99,6 +134,12 @@ export const QuizResultComponent = ({
           </div>
         );
       })}
+
+      {console.log('numberCorrectAnswers', numberCorrectAnswers)}
+
+      <div className={getResultCssClass()}>
+        You scored {numberCorrectAnswers} out of 5
+      </div>
       <div className="submitAnswersContainer">
         <button className="submitAnswersButton" onClick={handleRegenerateQuiz}>
           Create a new Quiz

@@ -94,3 +94,34 @@ p {
   background-color: white;
   color: green;
 }
+
+.noResult {
+  display: none;
+}
+
+.redResult {
+  background-color: red;
+  color: black;
+  width: fit-content;
+  height: 30px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.yellowResult {
+  background-color: yellow;
+  color: black;
+  width: fit-content;
+  height: 30px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.greenResult {
+  background-color: green;
+  color: black;
+  width: fit-content;
+  height: 30px;
+  text-align: center;
+  margin-top: 10px;
+}
