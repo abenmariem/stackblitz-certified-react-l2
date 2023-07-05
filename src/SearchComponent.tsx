@@ -3,6 +3,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { Category, CategoryListResponse, Question, Quiz } from './Responses';
 import { QuizComponent } from './QuizComponent';
 import { QuizResultComponent } from './QuizResultComponent';
+import { Chance } from 'chance';
 
 
 export const SearchComponent = () => {
@@ -22,6 +23,8 @@ export const SearchComponent = () => {
   });
 
   const [quizSubmitted, setQuizSubmitted] = useState<boolean>(false);
+
+  const seed:number= Math. random() * 100;
 
   const fetchCategories = async () => {
     setCategoryListLoading(true);
@@ -81,23 +84,9 @@ export const SearchComponent = () => {
   };
 
   const getScrambledArrayAnswers: (question: Question) => string[] = (questionToScramble: Question) => {
-    const result: string[] = [];
-    if (typeof questionToScramble.correct_answer === 'string') {
-      result.push(questionToScramble.correct_answer);
-    }
-    if (typeof questionToScramble.incorrect_answers === 'string') {
-      result.push(questionToScramble.incorrect_answers);
-    }
-
-    if (Array.isArray(questionToScramble.correct_answer)) {
-      result.push(...questionToScramble.correct_answer);
-    }
-
-    if (Array.isArray(questionToScramble.incorrect_answers)) {
-      result.push(...questionToScramble.incorrect_answers);
-    }
-
-    return result;
+    const answersArray: string[] = [...questionToScramble.incorrect_answers, questionToScramble.correct_answer];
+    const chance1 = new Chance(seed);
+    return chance1.shuffle(answersArray);
   };
 
 
