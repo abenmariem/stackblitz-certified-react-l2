@@ -4,7 +4,6 @@ import { Category, CategoryListResponse, Question, Quiz } from './Responses';
 import { QuizComponent } from './QuizComponent';
 import { QuizResultComponent } from './QuizResultComponent';
 
-
 export const SearchComponent = () => {
   const [categoryList, setCategoryList] = useState([]);
 
@@ -22,6 +21,18 @@ export const SearchComponent = () => {
   });
 
   const [quizSubmitted, setQuizSubmitted] = useState<boolean>(false);
+
+
+  const randomInteger = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
+  const seed = randomInteger(-1,1);
+
+  const getScrambledArrayAnswers: (question: Question) => string[] = (questionToScramble: Question) => {
+    const toSuffle: string[] = [...questionToScramble.incorrect_answers,questionToScramble.correct_answer];
+    return shuffle(toSuffle, random(seed));
+  };
 
   const fetchCategories = async () => {
     setCategoryListLoading(true);
@@ -80,25 +91,7 @@ export const SearchComponent = () => {
     setAnswerList((oldList) => [...oldList, answer]);
   };
 
-  const getScrambledArrayAnswers: (question: Question) => string[] = (questionToScramble: Question) => {
-    const result: string[] = [];
-    if (typeof questionToScramble.correct_answer === 'string') {
-      result.push(questionToScramble.correct_answer);
-    }
-    if (typeof questionToScramble.incorrect_answers === 'string') {
-      result.push(questionToScramble.incorrect_answers);
-    }
 
-    if (Array.isArray(questionToScramble.correct_answer)) {
-      result.push(...questionToScramble.correct_answer);
-    }
-
-    if (Array.isArray(questionToScramble.incorrect_answers)) {
-      result.push(...questionToScramble.incorrect_answers);
-    }
-
-    return result;
-  };
 
 
   return (
