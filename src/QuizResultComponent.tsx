@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
 import { Question } from './Responses';
-import { QuizResultItemComponent } from './QuizResultItemComponent';
 
 export interface QuestionResultProps {
   inputQuestions: Question[];
