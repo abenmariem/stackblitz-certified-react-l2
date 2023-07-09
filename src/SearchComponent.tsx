@@ -77,7 +77,10 @@ export const SearchComponent = () => {
 
 
   const handleAnswerSelection = (answer: string) => {
-    setAnswerList([...answerList, answer]);
+    console.log('answerList before', answerList);
+    setAnswerList((answerList) => [...answerList, answer]);
+    console.log('answerList after', answerList);
+
   };
 
   const getScrambledArrayAnswers: (question: Question) => string[] = (questionToScramble: Question) => {

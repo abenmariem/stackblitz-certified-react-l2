@@ -23,13 +23,17 @@ export const QuizItemComponent = ({
 
   const scrambledArrayAnswers = scrambledAnswers(inputQuestion);
 
-  const selectAnswerHandler = (evt, index: number) => {
-    evt.preventDefault();
+  const selectAnswerHandler = (evt, value) => {
+    //  console.log('event in QuizItemComponent ', evt);
+
+    // evt.preventDefault();
     if (disabledNonSelectedAnswers) {
       return;
     }
     evt.target.classList.toggle('active');
     disabledNonSelectedAnswers = true;
+    console.log('selected answer ', value);
+    onSelectAnswer(value);
   };
 
   let buttonAnswers = scrambledArrayAnswers.map((answer, index) => (

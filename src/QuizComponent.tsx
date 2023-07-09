@@ -21,6 +21,8 @@ export const QuizComponent = ({
 }: QuizProps) => {
   console.log('question list QuizComponent', questions);
 
+  console.log('answer list QuizComponent', answers);
+
   if (questions.length == 0) {
     return null;
   }

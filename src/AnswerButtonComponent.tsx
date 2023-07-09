@@ -4,20 +4,19 @@ export interface AnswerButtonProps {
   value: string;
   className: string;
   index: number;
-  handleClick(evt, index: number): void;
+  handleClick(evt, value): void;
   disabledNonSelectedAnswers: boolean;
 }
 
 export const AnswerButton = ({
   value,
   className,
-  index,
   handleClick,
   disabledNonSelectedAnswers,
 }: AnswerButtonProps) => {
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt, value) => {
     evt.preventDefault();
-    handleClick(evt, index);
+    handleClick(evt, value);
   };
 
   // const [disabled, setDisabled] = React.useState(false);
@@ -25,7 +24,7 @@ export const AnswerButton = ({
   return (
     <button
       type="button"
-      onClick={handleSubmit}
+      onClick={(evt) => handleSubmit(evt, value)}
       className={className}
       disabled={disabledNonSelectedAnswers}
     >
