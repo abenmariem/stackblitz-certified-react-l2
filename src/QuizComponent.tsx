@@ -8,7 +8,6 @@ export interface QuizProps {
   quizSubmitted: boolean;
   onSelectAnswer(data: string): void;
   onQuizSubmitted(data: boolean): void;
-  scrambledAnswers(question: Question): string[];
 }
 
 export const QuizComponent = ({
@@ -16,7 +15,6 @@ export const QuizComponent = ({
   answers,
   onSelectAnswer,
   onQuizSubmitted,
-  scrambledAnswers,
   quizSubmitted,
 }: QuizProps) => {
   console.log('question list QuizComponent', questions);
@@ -27,7 +25,8 @@ export const QuizComponent = ({
     return null;
   }
 
-  const handleQuizSubmitted = () => {
+  const handleQuizSubmitted = (evt) => {
+    evt.preventDefault();
     onQuizSubmitted(true);
   };
 
@@ -46,7 +45,6 @@ export const QuizComponent = ({
               <QuizItemComponent
                 inputQuestion={question}
                 onSelectAnswer={onSelectAnswer}
-                scrambledAnswers={scrambledAnswers}
               />
             </div>
           );

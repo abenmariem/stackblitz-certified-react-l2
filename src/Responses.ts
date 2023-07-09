@@ -16,6 +16,7 @@ export interface Question {
   question: string;
   correct_answer: string;
   incorrect_answers: Array<string> | string;
+  scrambled_answers?: Array<string>;
 }
 
 export interface Quiz {

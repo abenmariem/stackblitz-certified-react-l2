@@ -3,6 +3,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { Category, CategoryListResponse, Question, Quiz } from './Responses';
 import { QuizComponent } from './QuizComponent';
 import { QuizResultComponent } from './QuizResultComponent';
+import Chance from 'chance';
 
 export const SearchComponent = () => {
   const [categoryList, setCategoryList] = useState([]);
@@ -22,16 +23,16 @@ export const SearchComponent = () => {
 
   const [quizSubmitted, setQuizSubmitted] = useState<boolean>(false);
 
-
   const randomInteger = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-  
-  const seed = randomInteger(-1,1);
+  };
 
-  const getScrambledArrayAnswers: (question: Question) => string[] = (questionToScramble: Question) => {
-    const toSuffle: string[] = [...questionToScramble.incorrect_answers,questionToScramble.correct_answer];
-    return shuffle(toSuffle, random(seed));
+  
+
+  const getScrambledArrayAnswers: (question: Question, seed:number) => string[] = (questionToScramble: Question, seed:number) => {
+    const answersArray: string[] = [...questionToScramble.incorrect_answers, questionToScramble.correct_answer];
+    const chance1 = new Chance(seed);
+    return chance1.shuffle(answersArray);
   };
 
   const fetchCategories = async () => {
@@ -71,6 +72,11 @@ export const SearchComponent = () => {
     const quizResponse: Quiz = await quiz.json();
 
     const questions: Array<Question> = quizResponse?.results;
+
+    questions.forEach(question => {
+         const seed = randomInteger(1, 100);
+         question.scrambled_answers= getScrambledArrayAnswers(question, seed);
+    });
 
     console.log('questions', questions);
 
@@ -143,7 +149,7 @@ export const SearchComponent = () => {
 
           <button className='searchButton'>Create</button>
 
-          {quizSubmitted ? <QuizResultComponent  inputQuestions={...questionList} answers={...answerList} scrambledAnswers={getScrambledArrayAnswers} onGenerateQuiz ={setQuizSubmitted} setQuestionList={setQuestionList} setAnswerList={setAnswerList} /> : <QuizComponent questions={...questionList} onSelectAnswer={handleAnswerSelection} onQuizSubmitted={setQuizSubmitted} scrambledAnswers={getScrambledArrayAnswers} answers={...answerList} quizSubmitted={quizSubmitted}/>} 
+          {quizSubmitted ? <QuizResultComponent  inputQuestions={...questionList} answers={...answerList}  onGenerateQuiz ={setQuizSubmitted} setQuestionList={setQuestionList} setAnswerList={setAnswerList} /> : <QuizComponent questions={...questionList} onSelectAnswer={handleAnswerSelection} onQuizSubmitted={setQuizSubmitted}  answers={...answerList} quizSubmitted={quizSubmitted}/>} 
           
         </form>
       )}

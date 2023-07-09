@@ -4,7 +4,6 @@ import { Question } from './Responses';
 export interface QuestionResultProps {
   inputQuestions: Question[];
   answers: string[];
-  scrambledAnswers(question: Question): string[];
   onGenerateQuiz(data: boolean): void;
   setQuestionList(questions: Question[]): void;
   setAnswerList(answerList: string[]): void;
@@ -13,7 +12,6 @@ export interface QuestionResultProps {
 export const QuizResultComponent = ({
   inputQuestions,
   answers,
-  scrambledAnswers,
   onGenerateQuiz,
   setQuestionList,
   setAnswerList,
@@ -123,7 +121,7 @@ export const QuizResultComponent = ({
               className="tick"
               dangerouslySetInnerHTML={{ __html: question.question }}
             />
-            {scrambledAnswers(question).map(
+            {question.scrambled_answers.map(
               (questionAnswer: string, answerIndex) => {
                 return (
                   <span key={index + '_' + answerIndex}>

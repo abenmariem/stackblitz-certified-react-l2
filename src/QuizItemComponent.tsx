@@ -5,13 +5,11 @@ import { AnswerButton } from './AnswerButtonComponent';
 export interface QuestionItemProps {
   inputQuestion: Question;
   onSelectAnswer(data: string): void;
-  scrambledAnswers(question: Question): string[];
 }
 
 export const QuizItemComponent = ({
   inputQuestion,
   onSelectAnswer,
-  scrambledAnswers,
 }: QuestionItemProps) => {
   console.log('question in QuizItemComponent', inputQuestion);
 
@@ -19,14 +17,13 @@ export const QuizItemComponent = ({
     return null;
   }
 
+  const scrambledArrayAnswers = inputQuestion.scrambled_answers;
   let disabledNonSelectedAnswers = false;
-
-  const scrambledArrayAnswers = scrambledAnswers(inputQuestion);
 
   const selectAnswerHandler = (evt, value) => {
     //  console.log('event in QuizItemComponent ', evt);
 
-    // evt.preventDefault();
+    evt.preventDefault();
     if (disabledNonSelectedAnswers) {
       return;
     }
