@@ -9,6 +9,7 @@ export interface QuestionResultProps {
   scrambledAnswers(question: Question): string[];
   onGenerateQuiz(data: boolean): void;
   setQuestionList(questions: Question[]): void;
+  setAnswerList(answerList: string[]): void;
 }
 
 export const QuizResultComponent = ({
@@ -17,6 +18,7 @@ export const QuizResultComponent = ({
   scrambledAnswers,
   onGenerateQuiz,
   setQuestionList,
+  setAnswerList,
 }: QuestionResultProps) => {
   console.log('questions in QuizResultComponent', inputQuestions);
   console.log('answers in QuizResultComponent', answers);
@@ -82,6 +84,7 @@ export const QuizResultComponent = ({
     evt.preventDefault();
     onGenerateQuiz(false);
     setQuestionList([]);
+    setAnswerList([]);
   };
 
   const getResultCssClass = () => {
