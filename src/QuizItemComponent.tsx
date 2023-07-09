@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Question } from './Responses';
+import { AnswerButton } from './AnswerButtonComponent';
 
 export interface QuestionItemProps {
   inputQuestion: Question;
@@ -14,35 +15,40 @@ export const QuizItemComponent = ({
 }: QuestionItemProps) => {
   console.log('question in QuizItemComponent', inputQuestion);
 
-  const [question, setQuestion] = React.useState(inputQuestion);
-
-  if (!question) {
+  if (!inputQuestion) {
     return null;
   }
 
-  const scrambledArrayAnswers = scrambledAnswers(question);
+  let disabledNonSelectedAnswers = false;
 
-  const selectAnswerHandler = (evt) => {
+  const scrambledArrayAnswers = scrambledAnswers(inputQuestion);
+
+  const selectAnswerHandler = (evt, index: number) => {
     evt.preventDefault();
+    if (disabledNonSelectedAnswers) {
+      return;
+    }
     evt.target.classList.toggle('active');
-    onSelectAnswer(evt.currentTarget.value);
+    disabledNonSelectedAnswers = true;
   };
+
+  let buttonAnswers = scrambledArrayAnswers.map((answer, index) => (
+    <AnswerButton
+      key={answer}
+      value={answer}
+      className="aternativeButton tick"
+      handleClick={selectAnswerHandler}
+      index={index}
+      disabledNonSelectedAnswers={disabledNonSelectedAnswers}
+    />
+  ));
+
+  const [alternativesButtons, setAlternativesButtons] =
+    React.useState(buttonAnswers);
 
   return (
     <>
-      <div>
-        {scrambledArrayAnswers &&
-          scrambledArrayAnswers.map((answer) => (
-            <button
-              key={answer}
-              value={answer}
-              className="aternativeButton tick"
-              onClick={selectAnswerHandler}
-            >
-              {answer}
-            </button>
-          ))}
-      </div>
+      <div>{scrambledArrayAnswers && alternativesButtons}</div>
     </>
   );
 };

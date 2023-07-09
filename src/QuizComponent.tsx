@@ -54,6 +54,7 @@ export const QuizComponent = ({
             className="submitAnswersButton"
             style={{ display: answers.length < 5 ? 'none' : 'block' }}
             onClick={handleQuizSubmitted}
+            disabled={true}
           >
             Submit
           </button>
